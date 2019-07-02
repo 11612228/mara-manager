@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="icon" type="images/jpg" href="/images/favicon.jpg">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">-->
+    <title>Advanced Low dimensional Materials Lab Management</title>
+    <!--     <title> 南方科技大学</title>-->
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
+    <link rel="stylesheet" type="text/css" href="/css/verify.css">
+    <script src="/js/jquery.min.js"></script>
+</head>
+<body>
+
+<div th:if="${error}">
+    <script type="text/javascript">
+        alert('Sorry, the account with this keycode was not found.');
+    </script>
+</div>
+
+<div class="total">
+        <div class="register-content register-content_j">
+            <div class="register-text" id="register-two">
+                <div class="text-title">Login system</div>
+                <div class="text-reg text-reg_j">
+                    <div>UserName
+                        <input id="username" type="text" placeholder="Enter UserName here..."></div>
+                    <div>Password
+                        <input id="password" type="password" placeholder="Enter password here..."></div>
+                    <div>
+                        <div class="con">
+                            <div id="mpanel"></div>
+                        </div>
+                    </div>
+                </div>
+                <button class="reg-btn" id="login">
+                    Sign in
+                </button>
+            </div>
+        </div>
+</div>
+
+
+<script type="text/javascript" src="/js/verify.js"></script>
+
+<script type="text/javascript">
+    function post(URL, PARAMS)
+    {
+        var temp = document.createElement("form");
+        temp.action = URL;
+        temp.method = "post";
+        temp.style.display = "none";
+        for (var x in PARAMS)
+        {
+            var opt = document.createElement("textarea");
+            opt.name = x;
+            opt.value = PARAMS[x];
+            temp.appendChild(opt);
+        }
+        document.body.appendChild(temp);
+        temp.submit();
+        return temp;
+    }
+
+    $(function () {
+
+        $('#mpanel').codeVerify({
+            type: 1,
+            width: '80px',
+            height: '27px',
+            fontSize: '18px',
+            codeLength: 4,
+            btnId: 'login', // 登陆按钮ID
+            ready: function () {
+            },
+            success: function () {
+                var userName = document.getElementById('username').value;
+
+                var password = document.getElementById('password').value;
+
+                if (userName.length < 4 || password.length < 4) {
+
+                    alert('Incorrect account or password format');
+
+                } else {
+
+                    var body = {
+                        "userName" : userName,
+                        "password": password
+                    };
+                    post('/check', body);
+
+                }
+            },
+            error: function () {
+                alert("Verification code error");
+            }
+        });
+
+    });
+
+</script>
+
+</body>
+</html>
