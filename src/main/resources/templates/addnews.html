@@ -5,23 +5,24 @@
     <link rel="icon" type="images/jpg" href="./images/favicon.jpg">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!--<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">-->
-    <title>LJH Research Group </title>
+    <title>Advanced Low dimensional Materials Lab </title>
     <!--     <title> 南方科技大学</title>-->
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp">
-    <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/css/mcommon.css">
     <link rel="stylesheet" type="text/css" href="/css/index.css">
     <link rel="stylesheet" type="text/css" href="/css/swiper.min.css">
-    <script src="/js/swiper.min.js"></script>
     <script src="/js/jquery.min.js"></script>
-    <script src="/js/common.js"></script>
 </head>
 
 <body style="">
-
+<div class="header">
+    <h5 th:text="${userInfoBean.getRealName()}">
+    </h5>
+    <a href="/mIndex?id=404">Logout</a>
+</div>
 <div class="nav-wrapper">
     <div class="nav">
         <div class="pc-nav">
@@ -33,69 +34,79 @@
                 <li class="">
 
                     <a href="/mIndex?id=1">UserInfo</a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-element">
+                            <a href="/mIndex?id=1">Account List</a>
+                        </li>
+                        <li class="dropdown-element">
+                            <a href="/mIndex?id=12">Create Account</a>
+                        </li>
 
+                    </ul>
+                </li>
+
+                <li class="">
+                    <a href="/mIndex?id=2">Pictures</a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-element">
+                            <a href="/mIndex?id=2">Pictures List</a>
+                        </li>
+                        <li class="dropdown-element">
+                            <a href="/mIndex?id=22">Add Pictures</a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="">
-
-                    <a href="/mIndex?id=2">Alumni</a>
-
+                    <a href="/mIndex?id=3">Publication</a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-element">
+                            <a href="/mIndex?id=3">Publication List</a>
+                        </li>
+                        <li class="dropdown-element">
+                            <a href="/mIndex?id=32">Add Publication</a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="">
-
-                    <a href="/mIndex?id=3">Picture</a>
-
+                    <a href="/mIndex?id=4">Banner</a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-element">
+                            <a href="/mIndex?id=4">Banner List</a>
+                        </li>
+                        <li class="dropdown-element">
+                            <a href="/mIndex?id=42">Add Banner</a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="">
-
-                    <a href="/mIndex?id=4">Publication</a>
-
+                    <a href="/mIndex?id=5">News</a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-element">
+                            <a href="/mIndex?id=5">News List</a>
+                        </li>
+                        <li class="dropdown-element">
+                            <a href="/mIndex?id=52">Add News</a>
+                        </li>
+                    </ul>
                 </li>
-                <li class="">
-
-                    <a href="/mIndex?id=5">Banner</a>
-
-                </li>
-                <li class="">
-
-                    <a href="/mIndex?id=6">News</a>
-
-                </li>
+                <!--<li class="">-->
+                <!--<a href="/mIndex?id=2">Alumni</a>-->
+                <!--</li>-->
             </ul>
         </div>
     </div>
 </div>
 
-<div class="footer">
-    <div class="contact">
-        <p>
-            Contact
-        </p>
-        <ul>
-            <li>
-                <p>Email: linjh@sustech.edu.cn</p>
-            </li>
-            <li>
-                <p>The research building 2 room 210,Southern University of Science and Technology, No 1088, Xueyuan Rd., Xili, Nanshan District, Shenzhen, Guangdong, China</p>
-            </li>
-        </ul>
-        <span style="font-size: 13px; color: #ffffff">JunHao Lin Group © 2019</span>
-    </div>
-    <div class="link">
-        <p>
-            Links
-        </p>
-        <ul>
-            <li>
-                <a href="http://www.sustech.edu.cn">SUSTech</a>
-            </li>
-            <li>
-                <a href="http://phy.sustech.edu.cn">The Department of Physics</a>
-            </li>
+<div class="main-wrap">
+    <ul>
+        <li>
+            <p>
+            </p>
+        </li>
+    </ul>
 
-        </ul>
-
-    </div>
 </div>
+
 
 
 </body>

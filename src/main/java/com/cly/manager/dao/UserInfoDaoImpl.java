@@ -124,7 +124,6 @@ public class UserInfoDaoImpl implements UserInfoDao {
             userInfoBean.setAddress(address);
             userInfoBean.setRealName(realName);
         }
-        System.out.println(userInfoBean.getUserName());
         dbutil.closeDBResource(connection, preparedStatement, resultSet);
         return userInfoBean;
     }

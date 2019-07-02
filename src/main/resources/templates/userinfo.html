@@ -99,9 +99,11 @@
 
 <div class="main-wrap">
     <ul>
-        <li>
-            <p>
+        <li th:each="userInfo:${userInfoBeanList}">
+            <p th:text="'Uid: '+${userInfo.getUid()}+' '+${userInfo.getRealName()}">
             </p>
+            <a href="/">delete</a>
+            <a href="/">modify</a>
         </li>
     </ul>
 

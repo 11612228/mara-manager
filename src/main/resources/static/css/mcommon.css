@@ -1,8 +1,6 @@
 html,body{
     font-size:12px;
     min-width: 1200px !important;
-    margin-top: 60px;
-
 }
 /*@media screen and (min-width:321px) and (max-width:375px){html{font-size:11px}}
 @media screen and (min-width:376px) and (max-width:414px){html{font-size:12px}}
@@ -11,27 +9,11 @@ html,body{
 @media screen and (min-width:720px) and (max-width:749px){html{font-size:22.5px}}
 @media screen and (min-width:750px) and (max-width:799px){html{font-size:23.5px}}
 @media screen and (min-width:800px){html{font-size:25px}}*/
-
-/*头部*/
-.header-wrapper{
-    width: 100%;
-    background: #fff;
+li{
+    list-style-type:none;
 }
 .header{
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    height: 120px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-sizing: border-box;
-    padding: 0 0.5rem;
-}
-.header h1{
-    font-size: 30px;
-    color: #003f43;
-    margin-top:2rem;
+float: right;
 }
 .nav-wrapper{
     width: 100%;
@@ -79,7 +61,7 @@ html,body{
     left:0;
     z-index: 5;
     box-sizing: border-box;
-    width: 10vw;
+    width: 15vw;
     background: rgba(0,63,67,0.5);
     display: none;
 }

@@ -32,7 +32,6 @@ public String login (@RequestParam(name="userName") String userName, @RequestPar
         HttpSession session =request.getSession();//这就是session的创建
         session.setAttribute("userInfoBean",userInfoBean);
         model.addAttribute("userInfoBean",userInfoBean);
-        model.addAttribute("imgSrc","null");
         return "management";
     }
 }
