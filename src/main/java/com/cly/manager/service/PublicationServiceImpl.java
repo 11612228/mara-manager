@@ -38,12 +38,16 @@ public class PublicationServiceImpl implements PublicationService {
     }
 
     @Override
-    public boolean addPublication(PublicationBean article) {
-        return false;
+    public boolean addPublication(PublicationBean publicationBean) {
+        return publicationDao.addPublication(publicationBean);
     }
 
     @Override
-    public boolean updatePublication(PublicationBean article) {
-        return false;
+    public boolean updatePublication(PublicationBean publicationBean) {
+        return publicationDao.updatePublication(publicationBean);
+    }
+    @Override
+    public boolean deletePublication(int pid) {
+        return publicationDao.deletePublication(pid);
     }
 }

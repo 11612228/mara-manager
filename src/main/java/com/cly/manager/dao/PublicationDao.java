@@ -10,7 +10,7 @@ public interface PublicationDao {
     List<PublicationBean> fetchPublicationListByUid(int uid)throws Exception;
     PublicationBean fetchPublication(int pid)throws Exception;
 
-    boolean addAPublication(PublicationBean article);
-    boolean updatePublication(PublicationBean article);
-
+    boolean addPublication(PublicationBean publicationBean);
+    boolean updatePublication(PublicationBean publicationBean);
+    boolean deletePublication(int pid);
 }

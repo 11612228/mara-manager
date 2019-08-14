@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface InterestService {
     List<InterestBean> getInterestBeanList(int uid) throws Exception;
+    boolean addInterestBean(InterestBean interestBean);
+    boolean deleteInterestBean(int uid);
 }

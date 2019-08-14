@@ -38,4 +38,35 @@ public class InterestDaoImpl implements InterestDao{
         dbutil.closeDBResource(connection, preparedStatement, resultSet);
         return interestBeanList;
     }
+
+    @Override
+    public boolean addInterestBean(InterestBean interestBean) {
+        try {
+            connection = dbutil.getConnection();
+            String sql = "INSERT INTO Interest (interest, uid) VALUES (?, ?);";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, interestBean.getInterest());
+            preparedStatement.setInt(2, interestBean.getUid());
+            int result = preparedStatement.executeUpdate();
+            dbutil.closeDBResource(connection, preparedStatement, resultSet);
+            return result!=0;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+    @Override
+    public boolean deleteInterestBean(int uid) {
+        try {
+            connection = dbutil.getConnection();
+            String sql = "DELETE from Interest where uid = ?;";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, uid);
+            int result = preparedStatement.executeUpdate();
+            dbutil.closeDBResource(connection, preparedStatement, resultSet);
+            return result != 0;
+        }catch (Exception e){
+            return false;
+        }
+    }
 }

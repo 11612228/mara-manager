@@ -8,7 +8,7 @@ public class ConnectDB {
     public Connection getConnection() throws Exception{
         Connection connection=null;
         String diverClass="com.mysql.cj.jdbc.Driver";
-        String url="jdbc:mysql://www.marahub.club:3306/web?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+        String url="jdbc:mysql://localhost:3306/web?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
         String name="root";
         String password="che1998530";
         Class.forName(diverClass);

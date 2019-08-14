@@ -60,7 +60,7 @@ float: right;
     top: 100%;
     left:0;
     z-index: 5;
-    box-sizing: border-box;
+    box-sizing: content-box;
     width: 15vw;
     background: rgba(0,63,67,0.5);
     display: none;

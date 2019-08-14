@@ -38,4 +38,35 @@ public class EducationDaoImpl implements EducationDao {
         dbutil.closeDBResource(connection, preparedStatement, resultSet);
         return educationBeanList;
     }
+
+    @Override
+    public boolean addEducationBean(EducationBean educationBean) {
+        try {
+            connection = dbutil.getConnection();
+            String sql = "INSERT INTO Education (education, uid) VALUES (?, ?);";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, educationBean.getEducation());
+            preparedStatement.setInt(2, educationBean.getUid());
+            int result = preparedStatement.executeUpdate();
+            dbutil.closeDBResource(connection, preparedStatement, resultSet);
+            return result!=0;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+    @Override
+    public boolean deleteEducationBean(int uid) {
+        try {
+            connection = dbutil.getConnection();
+            String sql = "DELETE from Education where uid = ?;";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, uid);
+            int result = preparedStatement.executeUpdate();
+            dbutil.closeDBResource(connection, preparedStatement, resultSet);
+            return result != 0;
+        }catch (Exception e){
+            return false;
+        }
+    }
 }

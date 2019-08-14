@@ -12,4 +12,14 @@ public class EducationServiceImpl implements EducationService {
     public List<EducationBean> getEducationList(int uid) throws Exception {
         return educationDao.fetchEducationBeanList(uid);
     }
+
+    @Override
+    public boolean addEducationBean(EducationBean educationBean) {
+        return educationDao.addEducationBean(educationBean);
+    }
+
+    @Override
+    public boolean deleteEducationBean(int uid) {
+        return educationDao.deleteEducationBean(uid);
+    }
 }

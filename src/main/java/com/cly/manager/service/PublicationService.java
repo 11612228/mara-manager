@@ -11,6 +11,7 @@ public interface PublicationService {
     List<PublicationBean> getPublicationListByUid(int uid) throws Exception;
 
     PublicationBean getPublication(int pid)throws Exception;
-    boolean addPublication(PublicationBean article);
-    boolean updatePublication(PublicationBean article);
+    boolean addPublication(PublicationBean publicationBean);
+    boolean updatePublication(PublicationBean publicationBean);
+    boolean deletePublication(int pid);
 }

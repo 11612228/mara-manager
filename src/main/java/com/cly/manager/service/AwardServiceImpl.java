@@ -13,4 +13,14 @@ public class AwardServiceImpl implements AwardService  {
     public List<AwardBean> getAwardBeanList(int uid) throws Exception {
         return awardDao.fetchAwardBeanList(uid);
     }
+
+    @Override
+    public boolean addAwardBean(AwardBean awardBean) {
+       return awardDao.addAwardBean(awardBean);
+    }
+
+    @Override
+    public boolean deleteAwardBean(int uid) {
+        return awardDao.deleteAwardBean(uid);
+    }
 }

@@ -38,4 +38,35 @@ public class AwardDaoImpl implements AwardDao {
         dbutil.closeDBResource(connection, preparedStatement, resultSet);
         return awardBeanList;
     }
+
+    @Override
+    public boolean addAwardBean(AwardBean awardBean){
+        try {
+            connection = dbutil.getConnection();
+            String sql = "INSERT INTO Award (award, uid) VALUES (?, ?);";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, awardBean.getAward());
+            preparedStatement.setInt(2, awardBean.getUid());
+            int result = preparedStatement.executeUpdate();
+            dbutil.closeDBResource(connection, preparedStatement, resultSet);
+            return result!=0;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+    @Override
+    public boolean deleteAwardBean(int uid) {
+        try {
+            connection = dbutil.getConnection();
+            String sql = "DELETE from Award where uid = ?;";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, uid);
+            int result = preparedStatement.executeUpdate();
+            dbutil.closeDBResource(connection, preparedStatement, resultSet);
+            return result != 0;
+        }catch (Exception e){
+            return false;
+        }
+    }
 }

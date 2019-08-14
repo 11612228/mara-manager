@@ -11,4 +11,5 @@ public interface NewsDao {
 
     boolean addNews(NewsBean newsBean);
     boolean updateNews(NewsBean newsBean);
+    boolean deleteNews(int nid);
 }

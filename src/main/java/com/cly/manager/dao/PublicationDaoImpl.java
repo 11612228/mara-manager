@@ -149,12 +149,55 @@ public class PublicationDaoImpl implements PublicationDao {
     }
 
     @Override
-    public boolean addAPublication(PublicationBean publicationBean) {
-        return false;
+    public boolean addPublication(PublicationBean publicationBean) {
+        try {
+            connection = dbutil.getConnection();
+            String sql="insert into Publication (year,content,uid,imgSrc,pdfUrl) values (?,?,?,?,?) ";
+            preparedStatement=connection.prepareStatement(sql);
+            preparedStatement.setInt(1,publicationBean.getYear());
+            preparedStatement.setString(2,publicationBean.getContent());
+            preparedStatement.setInt(3,publicationBean.getUid());
+            preparedStatement.setString(4,publicationBean.getImgSrc());
+            preparedStatement.setString(5,publicationBean.getPdfUrl());
+            int rtn = preparedStatement.executeUpdate();
+            dbutil.closeDBResource(connection, preparedStatement, resultSet);
+            return rtn!=0;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
     public boolean updatePublication(PublicationBean publicationBean) {
-        return false;
+        try {
+            connection = dbutil.getConnection();
+            String sql="UPDATE Publication SET year=?, content=?, imgSrc=?, pdfUrl=? where pid = ?";
+            preparedStatement=connection.prepareStatement(sql);
+            preparedStatement.setInt(1,publicationBean.getYear());
+            preparedStatement.setString(2,publicationBean.getContent());
+            preparedStatement.setString(3,publicationBean.getImgSrc());
+            preparedStatement.setString(4,publicationBean.getPdfUrl());
+            preparedStatement.setInt(5,publicationBean.getPid());
+            int rtn = preparedStatement.executeUpdate();
+            dbutil.closeDBResource(connection, preparedStatement, resultSet);
+            return rtn!=0;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean deletePublication(int pid) {
+        try {
+            connection = dbutil.getConnection();
+            String sql="delete from Publication where pid = ?";
+            preparedStatement=connection.prepareStatement(sql);
+            preparedStatement.setInt(1, pid);
+            int rtn = preparedStatement.executeUpdate();
+            dbutil.closeDBResource(connection, preparedStatement, resultSet);
+            return rtn!=0;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

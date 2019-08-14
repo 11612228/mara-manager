@@ -12,7 +12,9 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp">
     <link rel="stylesheet" type="text/css" href="/css/mcommon.css">
-    <link rel="stylesheet" type="text/css" href="/css/add.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/publication.css">
     <script src="/js/jquery.min.js"></script>
 </head>
 
@@ -96,98 +98,35 @@
     </div>
 </div>
 
-<div class="main-wrap">
+<div class="main-wrapper">
     <div class="main">
         <div class="center">
-    <div>Img
-        <input class="file" name="file" id="uploadimgs" onchange="setImagePreview(this,'localImag','img1');" type="file"/>
-    </div>
-    <div id="localImag">
-        <img id="img1" alt="" border="1"/>
-    </div>
-    <div>content
-        <textarea id="content" rows="5" cols="30" wrap="no/off" ></textarea></div>
-    <div>year</div>
-        <input id="year" type="number" >
-    <div>pdfUrl</div>
-        <textarea id="pdfUrl" rows="5" cols="30" wrap="no/off" ></textarea>
-    <div>authorName</div>
-        <input id="authorName" type="text" >
-    <div>
-        <button class="reg-btn" id="upload" onclick="upload()">
-            Upload
-        </button>
-    </div>
+            <div class="right">
+                <div class="all">
+                    <ul>
+                        <li th:each="bannerBean:${bannerBeanList}">
+                            <div class="pic">
+                                <img th:src="${bannerBean.getImgSrc()}" th:alt="${bannerBean.getBid()}">
+                            </div>
+                            <div class="word">
+                                <a th:href="'/modifyBanner?bid='+${bannerBean.getBid()}">modify</a>
+                                <a th:href="'/deleteBanner?bid='+${bannerBean.getBid()}">delete</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="page">
+                        <span>&lt;</span>
+                        <span th:each="num:${pageList}">
+                            <span th:if="${page} ne ${num}"><a th:href="'/bannerPage?page='+${num}+'&'+${year}" th:text="${num}"></a></span>
+                            <span th:if="${page} eq ${num}" class="active"><a th:text="${num}"></a></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
-<script type="text/javascript">
-    function setImagePreview(docObj,localImag,imgObjPreviewId){
-        var localImagDiv  = document.getElementById(localImag);
-        var imgObjPreview = document.getElementById(imgObjPreviewId);
-        if(docObj.files && docObj.files[0]){
-            //火狐下，直接设img属性
-            imgObjPreview.style.display = 'block';
-            imgObjPreview.style.width = '200px';
-            imgObjPreview.style.height = '300px';
-
-            //火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式
-            imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
-        }else{
-            //IE下，使用滤镜
-            docObj.select();
-            var imgSrc = document.selection.createRange().text;
-
-            //必须设置初始大小
-            localImagDiv.style.width = "100px";
-            localImagDiv.style.height = "120px";
-
-            //图片异常的捕捉，防止用户修改后缀来伪造图片
-            try{
-                localImagDiv.style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
-                localImagDiv.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
-            }catch(e){
-                alert("您上传的图片格式不正确，请重新选择!");
-                return false;
-            }
-            imgObjPreview.style.display = 'none';
-            document.selection.empty();
-        }
-        return true;
-    }
-</script>
-
-<script type="text/javascript">
-    function post(URL, PARAMS)
-    {
-        var temp = document.createElement("form");
-        temp.action = URL;
-        temp.method = "post";
-        temp.enctype="multipart/form-data"
-        temp.style.display = "none";
-        temp.appendChild(document.getElementById("uploadimgs"));
-        for (var x in PARAMS)
-        {
-            var opt = document.createElement("textarea");
-            opt.name = x;
-            opt.value = PARAMS[x];
-            temp.appendChild(opt);
-        }
-        document.body.appendChild(temp);
-        temp.submit();
-        return temp;
-    }
-    function upload() {
-            var params = {
-                content: document.getElementById("content").value,
-                year: document.getElementById("year").value,
-                pdfUrl: document.getElementById("pdfUrl").value,
-                authorName: document.getElementById("authorName").value
-            };
-            post("/newPublication", params);
-    }
-</script>
 
 </body>
 </html>

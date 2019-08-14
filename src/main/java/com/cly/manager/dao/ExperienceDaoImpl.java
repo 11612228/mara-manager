@@ -38,4 +38,35 @@ public class ExperienceDaoImpl implements ExperienceDao {
         dbutil.closeDBResource(connection, preparedStatement, resultSet);
         return experienceBeanList;
     }
+
+    @Override
+    public boolean addExperienceBean(ExperienceBean experienceBean) {
+        try {
+            connection = dbutil.getConnection();
+            String sql = "INSERT INTO Experience (experience, uid) VALUES (?, ?);";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, experienceBean.getExperience());
+            preparedStatement.setInt(2, experienceBean.getUid());
+            int result = preparedStatement.executeUpdate();
+            dbutil.closeDBResource(connection, preparedStatement, resultSet);
+            return result!=0;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+    @Override
+    public boolean deleteExperienceBean(int uid) {
+        try {
+            connection = dbutil.getConnection();
+            String sql = "DELETE from Experience where uid = ?;";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, uid);
+            int result = preparedStatement.executeUpdate();
+            dbutil.closeDBResource(connection, preparedStatement, resultSet);
+            return result != 0;
+        }catch (Exception e){
+            return false;
+        }
+    }
 }

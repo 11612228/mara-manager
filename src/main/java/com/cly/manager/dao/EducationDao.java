@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface EducationDao {
     List<EducationBean> fetchEducationBeanList(int uid) throws Exception;
+    boolean addEducationBean(EducationBean educationBean);
+    boolean deleteEducationBean(int uid);
 }

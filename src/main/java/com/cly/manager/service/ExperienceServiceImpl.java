@@ -12,4 +12,14 @@ public class ExperienceServiceImpl implements ExperienceService {
     public List<ExperienceBean> getExperienceBeanList(int uid) throws Exception {
         return experienceDao.fetchExperienceBeanList(uid);
     }
+
+    @Override
+    public boolean addExperienceBean(ExperienceBean experienceBean) {
+        return experienceDao.addExperienceBean(experienceBean);
+    }
+
+    @Override
+    public boolean deleteExperienceBean(int uid) {
+        return experienceDao.deleteExperienceBean(uid);
+    }
 }

@@ -12,4 +12,14 @@ public class InterestServiceImpl implements InterestService {
     public List<InterestBean> getInterestBeanList(int uid) throws Exception {
         return interestDao.fetchInterestBeanList(uid);
     }
+
+    @Override
+    public boolean addInterestBean(InterestBean interestBean) {
+        return interestDao.addInterestBean(interestBean);
+    }
+
+    @Override
+    public boolean deleteInterestBean(int uid) {
+        return interestDao.deleteInterestBean(uid);
+    }
 }

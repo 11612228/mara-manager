@@ -42,5 +42,10 @@ public class NewsServiceImpl implements NewsService {
         return newsDao.updateNews(newsBean);
     }
 
+    @Override
+    public boolean deleteNews(int nid) {
+        return newsDao.deleteNews(nid);
+    }
+
 
 }

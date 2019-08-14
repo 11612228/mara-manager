@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="icon" type="images/jpg" href="./images/favicon.jpg">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">-->
+    <title>Advanced Low dimensional Materials Lab </title>
+    <!--     <title> 南方科技大学</title>-->
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <link rel="stylesheet" type="text/css" href="/css/mcommon.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/publication.css">
+    <script src="/js/jquery.min.js"></script>
+</head>
+
+<body style="">
+<div class="header">
+    <h5 th:text="${userInfoBean.getRealName()}">
+    </h5>
+    <a href="/mIndex?id=404">Logout</a>
+</div>
+<div class="nav-wrapper">
+    <div class="nav">
+        <div class="pc-nav">
+            <ul>
+                <li class="">
+                    <a href="/mIndex?id=0">Home</a>
+                </li>
+
+                <li class="">
+
+                    <a href="/mIndex?id=1">UserInfo</a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-element">
+                            <a href="/mIndex?id=1">Account List</a>
+                        </li>
+                        <li class="dropdown-element">
+                            <a href="/mIndex?id=12">Create Account</a>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <li class="">
+                    <a href="/mIndex?id=2">Pictures</a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-element">
+                            <a href="/mIndex?id=2">Pictures List</a>
+                        </li>
+                        <li class="dropdown-element">
+                            <a href="/mIndex?id=22">Add Pictures</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="">
+                    <a href="/mIndex?id=3">Publication</a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-element">
+                            <a href="/mIndex?id=3">Publication List</a>
+                        </li>
+                        <li class="dropdown-element">
+                            <a href="/mIndex?id=32">Add Publication</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="">
+                    <a href="/mIndex?id=4">Banner</a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-element">
+                            <a href="/mIndex?id=4">Banner List</a>
+                        </li>
+                        <li class="dropdown-element">
+                            <a href="/mIndex?id=42">Add Banner</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="">
+                    <a href="/mIndex?id=5">News</a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-element">
+                            <a href="/mIndex?id=5">News List</a>
+                        </li>
+                        <li class="dropdown-element">
+                            <a href="/mIndex?id=52">Add News</a>
+                        </li>
+                    </ul>
+                </li>
+                <!--<li class="">-->
+                <!--<a href="/mIndex?id=2">Alumni</a>-->
+                <!--</li>-->
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="main-wrapper">
+    <div class="main">
+        <div class="center">
+            <div class="left">
+                <!--左侧菜单栏-->
+                <h4>Publications<i>+</i></h4>
+                <ul>
+
+                    <li class="">
+                        <a href="/publicationPage?page=1&amp;year=0">All</a>
+                    </li>
+
+
+                    <li class="">
+                        <a href="/publicationPage?page=1&amp;year=2019">2019</a>
+                    </li>
+
+
+                    <li class="">
+                        <a href="/publicationPage?page=1&amp;year=2018">2018</a>
+                    </li>
+
+
+                    <li class="">
+                        <a href="/publicationPage?page=1&amp;year=2017">2017</a>
+                    </li>
+
+
+                    <li class="">
+                        <a href="/publicationPage?page=1&amp;year=2016">2016</a>
+                    </li>
+
+
+                    <li class="">
+                        <a href="/publicationPage?page=1&amp;year=2015">2015</a>
+                    </li>
+
+
+                    <li class="">
+                        <a href="/publicationPage?page=1&amp;year=2014">2014</a>
+                    </li>
+
+
+                    <li class="">
+                        <a href="/publicationPage?page=1&amp;year=2013">2013</a>
+                    </li>
+
+
+                    <li class="">
+                        <a href="/publicationPage?page=1&amp;year=2012">2012</a>
+                    </li>
+
+
+                    <li class="">
+                        <a href="/publicationPage?page=1&amp;year=2011">2011</a>
+                    </li>
+
+
+                    <li class="">
+                        <a href="/publicationPage?page=1&amp;year=2010">2010</a>
+                    </li>
+
+
+                    <li class="">
+                        <a href="/publicationPage?page=1&amp;year=2009">2009</a>
+                    </li>
+
+
+                    <li class="">
+                        <a href="/publicationPage?page=1&amp;year=2008">2008 and before</a>
+                    </li>
+
+
+                </ul>
+            </div>
+            <div class="right">
+                <div class="all">
+                    <ul>
+                        <li th:each="publicationBean:${publicationBeanList}">
+                            <div class="pic">
+                                <img th:src="${publicationBean.getImgSrc()}" th:alt="${publicationBean.getPid()}">
+                            </div>
+                            <div class="word">
+                                <p style="text-align: justify;"><span style="font-family: times new roman;">
+                                    <span style="color: rgb(0, 0, 0); font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none;">
+                                        <strong>
+                                            <span style="font-size: 18px;"><p th:text="${publicationBean.getPid()}+'.'"></p>
+                                </span>
+                                </strong>
+                                </span>
+                                <span style="font-size: 18px;">
+                                        <span style="color: rgb(0, 0, 0); font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none;">
+                                            <span style="font-size: 16px;">
+                                            </span>
+                                        </span>
+                                    </span>
+                                <span style="font-family: times new roman; font-size: 18px;"><p th:text="${publicationBean.getContent()}"></p>
+                                        <a style="color: #007aff" th:href="${publicationBean.getPdfUrl()}" target="_blank">(PDF)</a>
+
+                                    </span>
+                                </p>
+                                <a th:href="'/modifyPublication?pid='+${publicationBean.getPid()}">modify</a>
+                                <a th:href="'/deletePublication?pid='+${publicationBean.getPid()}">delete</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="page">
+                        <span>&lt;</span>
+                        <span th:each="num:${pageList}">
+                            <span th:if="${page} ne ${num}"><a th:href="'/publicationPage?page='+${num}+'&'+${year}" th:text="${num}"></a></span>
+                            <span th:if="${page} eq ${num}" class="active"><a th:text="${num}"></a></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>

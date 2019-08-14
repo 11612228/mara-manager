@@ -17,4 +17,29 @@ public class BannerServiceImpl implements BannerService {
         }
         return bannerDaoList;
     }
+    @Override
+    public List<BannerBean> getBannerBeanList() throws Exception {
+        List<BannerBean> bannerDaoList = bannerDao.fetchBannerBeanList();
+        return bannerDaoList;
+    }
+
+    @Override
+    public boolean addBannerBean(BannerBean bannerBean) {
+        return bannerDao.addBannerBean(bannerBean);
+    }
+
+    @Override
+    public boolean deleteBannerBean(int bid) {
+        return bannerDao.deleteBannerBean(bid);
+    }
+
+    @Override
+    public boolean updateBannerBean(BannerBean bannerBean) {
+        return bannerDao.updateBannerBean(bannerBean);
+    }
+
+    @Override
+    public BannerBean getBannerBean(int bid) throws Exception {
+        return bannerDao.fetchBannerBean(bid);
+    }
 }

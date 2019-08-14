@@ -12,8 +12,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp">
     <link rel="stylesheet" type="text/css" href="/css/mcommon.css">
-    <link rel="stylesheet" type="text/css" href="/css/index.css">
-    <link rel="stylesheet" type="text/css" href="/css/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/add.css">
     <script src="/js/jquery.min.js"></script>
 </head>
 
@@ -98,16 +97,138 @@
 </div>
 
 <div class="main-wrap">
-    <ul>
-        <li>
-            <p>
-            </p>
-        </li>
-    </ul>
-
+    <div class="main">
+        <div class="center">
+            <div>Img
+                <input class="file" name="file" id="uploadimgs" onchange="setImagePreview(this,'localImag','img1');" type="file"/>
+            </div>
+            <div id="localImag">
+                <img id="img1" alt="" border="1"/>
+            </div>
+            <div>UserName</div>
+                <textarea id="userName" rows="1" cols="30" wrap="no/off" ></textarea>
+            <div>Password</div>
+                <textarea id="password" rows="1" cols="30" wrap="no/off" ></textarea>
+            <div>RealName</div>
+                <textarea id="realName" rows="1" cols="30" wrap="no/off" ></textarea>
+            <div>Address</div>
+                <textarea id="address" rows="4" cols="30" wrap="no/off" ></textarea>
+            <div>Email</div>
+                <textarea id="email" rows="4" cols="30" wrap="no/off" ></textarea>
+            <div>Office</div>
+                <textarea id="office" rows="4" cols="30" wrap="no/off" ></textarea>
+            <div>Telephone</div>
+                <textarea id="telephone" rows="4" cols="30" wrap="no/off" ></textarea>
+            <div>Post</div>
+                <textarea id="post" rows="1" cols="30" wrap="no/off" ></textarea>
+            <div>Brief</div>
+                <textarea id="brief" rows="4" cols="30" wrap="no/off" ></textarea>
+            <div>
+                <p>以下部分用分号分隔不同内容</p>
+            </div>
+            <div>Education</div>
+                <textarea id="education" rows="5" cols="30" wrap="no/off" ></textarea>
+            <div>Experience</div>
+                <textarea id="experience" rows="5" cols="30" wrap="no/off" ></textarea>
+            <div>Award</div>
+                <textarea id="award" rows="5" cols="30" wrap="no/off" ></textarea>
+            <div>Interest</div>
+                <textarea id="interest" rows="5" cols="30" wrap="no/off" ></textarea>
+            <div>
+                <button class="reg-btn" id="upload" onclick="upload()">
+                    Upload
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 
+<script type="text/javascript">
+    function setImagePreview(docObj,localImag,imgObjPreviewId){
+        var localImagDiv  = document.getElementById(localImag);
+        var imgObjPreview = document.getElementById(imgObjPreviewId);
+        if(docObj.files && docObj.files[0]){
+            //火狐下，直接设img属性
+            imgObjPreview.style.display = 'block';
+            imgObjPreview.style.width = '200px';
+            imgObjPreview.style.height = '300px';
 
+            //火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式
+            imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
+        }else{
+            //IE下，使用滤镜
+            docObj.select();
+            var imgSrc = document.selection.createRange().text;
+
+            //必须设置初始大小
+            localImagDiv.style.width = "100px";
+            localImagDiv.style.height = "120px";
+
+            //图片异常的捕捉，防止用户修改后缀来伪造图片
+            try{
+                localImagDiv.style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+                localImagDiv.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
+            }catch(e){
+                alert("您上传的图片格式不正确，请重新选择!");
+                return false;
+            }
+            imgObjPreview.style.display = 'none';
+            document.selection.empty();
+        }
+        return true;
+    }
+</script>
+
+<script type="text/javascript">
+    function post(URL, PARAMS)
+    {
+        var temp = document.createElement("form");
+        temp.action = URL;
+        temp.method = "post";
+        temp.enctype="multipart/form-data"
+        temp.style.display = "none";
+        temp.appendChild(document.getElementById("uploadimgs"));
+        for (var x in PARAMS)
+        {
+            var opt = document.createElement("textarea");
+            opt.name = x;
+            opt.value = PARAMS[x];
+            temp.appendChild(opt);
+        }
+        document.body.appendChild(temp);
+        temp.submit();
+        return temp;
+    }
+    function upload() {
+        var userName = document.getElementById('userName').value;
+
+        var password = document.getElementById('password').value;
+
+        if (userName.length < 4 || password.length < 4) {
+
+            alert('Incorrect account or password format');
+
+        }else {
+            var params = {
+                userName: document.getElementById("userName").value,
+                password: document.getElementById("password").value,
+                realName: document.getElementById("realName").value,
+                address: document.getElementById("address").value,
+                email: document.getElementById("email").value,
+                office: document.getElementById("office").value,
+                telephone: document.getElementById("telephone").value,
+                post: document.getElementById("post").value,
+                brief: document.getElementById("brief").value,
+                education: document.getElementById("education").value,
+                experience: document.getElementById("experience").value,
+                award: document.getElementById("award").value,
+                interest: document.getElementById("interest").value
+            };
+            post("/newUser", params);
+        }
+
+    }
+</script>
 
 </body>
 </html>

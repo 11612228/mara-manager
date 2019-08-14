@@ -1,0 +1,18 @@
+.main-wrapper{
+    width: 100%;
+    background: #f7f7f7;
+
+}
+.main{
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 50px 0;
+}
+.main .center{
+    border-top: 6px solid #003f43;
+    min-height: 1324px;
+    background: #fff;
+    box-shadow: 0 4px 30px rgba(227,232,232,0.5);
+}

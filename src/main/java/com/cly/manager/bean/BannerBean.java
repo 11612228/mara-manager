@@ -5,7 +5,6 @@ import java.io.Serializable;
 public class BannerBean implements Serializable {
     private int bid;
     private String imgSrc;
-    private String bName;
 
     public int getBid() {
         return bid;
@@ -21,13 +20,5 @@ public class BannerBean implements Serializable {
 
     public void setImgSrc(String imgSrc) {
         this.imgSrc = imgSrc;
-    }
-
-    public String getbName() {
-        return bName;
-    }
-
-    public void setbName(String pName) {
-        this.bName = pName;
     }
 }

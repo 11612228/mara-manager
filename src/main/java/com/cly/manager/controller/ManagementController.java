@@ -32,40 +32,28 @@ public class ManagementController {
                 model.addAttribute("userInfoBean",userInfoBean);
                 return "management";
             case 1:
-                model.addAttribute("userInfoBean",userInfoBean);
-                return "redirect:/userInfoBeanList";
+                return "redirect:/userInfoPage?page=1";
             case 12:
-                model.addAttribute("userInfoBean",userInfoBean);
-                return "adduserinfo";
+                return "redirect:/adduserInfo";
             case 2:
-                model.addAttribute("userInfoBean",userInfoBean);
-                return "picture";
+                return "redirect:/picturePage?page=1&amp;year=0";
             case 22:
-                model.addAttribute("userInfoBean",userInfoBean);
-                return "addpicture";
+                return "redirect:/addPicture";
             case 3:
-                return "publication";
+                return "redirect:/publicationPage?page=1&amp;year=0";
             case 32:
-                model.addAttribute("userInfoBean",userInfoBean);
-                return "addpublication";
+                return "redirect:/addPublication";
             case 4:
-                model.addAttribute("userInfoBean",userInfoBean);
-                return "banner";
+                return "redirect:/bannerPage?page=1";
             case 42:
-                model.addAttribute("userInfoBean",userInfoBean);
-                return "addbanner";
+                return "redirect:/addBanner";
             case 5:
-                model.addAttribute("userInfoBean",userInfoBean);
-                return "news";
+                return "redirect:/newsPage?page=1&amp;year=0";
             case 52:
-                model.addAttribute("userInfoBean",userInfoBean);
-                return "addnews";
+                return "redirect:/addNews";
             case 404:
                 request.getSession().removeAttribute("userInfoBean");
                 return "index";
-//            case 6:
-//                model.addAttribute("userInfoBean",userInfoBean);
-//                return "addalumni";
             default:
                 model.addAttribute("userInfoBean",userInfoBean);
                 return "management";
@@ -95,7 +83,7 @@ public class ManagementController {
         }
         String imgSrc = "/"+fileName;
         model.addAttribute("imgSrc",fileName);
-        return "management";
+        return "userinfo";
     }
 
 }

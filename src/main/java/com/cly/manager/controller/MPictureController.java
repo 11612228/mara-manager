@@ -1,9 +1,11 @@
 package com.cly.manager.controller;
 
-import com.cly.manager.bean.NewsBean;
+import com.cly.manager.bean.PictureBean;
 import com.cly.manager.bean.UserInfoBean;
-import com.cly.manager.service.NewsService;
-import com.cly.manager.service.NewsServiceImpl;
+import com.cly.manager.service.PictureService;
+import com.cly.manager.service.PictureServiceImpl;
+import com.cly.manager.service.UserInfoService;
+import com.cly.manager.service.UserInfoServiceImpl;
 import com.cly.manager.util.ImgUtil;
 import com.cly.manager.util.Interceptor;
 import org.springframework.stereotype.Controller;
@@ -18,80 +20,79 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
-public class MNewsController {
-    NewsService newsService = new NewsServiceImpl();
-    List<NewsBean> newsBeanList = null;
-    int pagesize = 7;
-    double fpagesize = 7.0;
+public class MPictureController {
+    UserInfoService userInfoService = new UserInfoServiceImpl();
+    PictureService pictureService = new PictureServiceImpl();
+    List<PictureBean> pictureBeanList = null;
+    int pagesize = 20;
+    double fpagesize = 20.0;
     int pageNumber;
     int[] pageList;
 
-    @GetMapping("/addNews")
-    public String modifyNews(Model model, HttpServletRequest request){
+    @GetMapping("/addPicture")
+    public String modifyPicture(Model model, HttpServletRequest request){
         if(!Interceptor.getInterceptor(request)){
             return "index";
         }
         UserInfoBean userInfoBean = (UserInfoBean) request.getSession().getAttribute("userInfoBean");
         UserInfoBean userInfo = null;
         model.addAttribute("userInfoBean",userInfoBean);
-        return "addnews";
+        return "addpicture";
     }
 
-    @GetMapping("/modifyNews")
-    public String modifyNews(@RequestParam(name="nid") int nid, Model model, HttpServletRequest request){
+    @GetMapping("/modifyPicture")
+    public String modifyPicture(@RequestParam(name="pid") int pid, Model model, HttpServletRequest request){
         if(!Interceptor.getInterceptor(request)){
             return "index";
         }
         UserInfoBean userInfoBean = (UserInfoBean) request.getSession().getAttribute("userInfoBean");
-        NewsBean newsBean = null;
+        PictureBean pictureBean = null;
         try {
-            newsBean = newsService.getNews(nid);
+            pictureBean = pictureService.getPicture(pid);
         } catch (Exception e) {
             e.printStackTrace();
         }
         model.addAttribute("userInfoBean",userInfoBean);
-        model.addAttribute("newsBean",newsBean);
-        return "newsinfo";
+        model.addAttribute("pictureBean",pictureBean);
+        return "pictureinfo";
     }
 
-    @GetMapping("/deleteNews")
-    public String deleteNews(@RequestParam(name="nid") int nid, Model model, HttpServletRequest request){
+    @GetMapping("/deletePicture")
+    public String deletePicture(@RequestParam(name="pid") int pid, Model model, HttpServletRequest request){
         if(!Interceptor.getInterceptor(request)){
             return "index";
         }
-        newsService.deleteNews(nid);
+        UserInfoBean userInfoBean = (UserInfoBean) request.getSession().getAttribute("userInfoBean");
+        pictureService.deletePicture(pid);
+        List<PictureBean> pictureBeanList = null;
         try {
-            newsBeanList = newsService.getNewsList();
+            pictureBeanList = pictureService.getPictureBeanList();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "redirect:/newsPage?page=1&amp;year=0";
+        return "redirect:/picturePage?page=1&amp;year=0";
     }
-    @PostMapping("/updateNews")
-    public String updateNews(@RequestParam(name="nid") int nid,
-                                    @RequestParam(name="content") String content,
-                                    @RequestParam(name="title") String title,
+    @PostMapping("/updatePicture")
+    public String updatePicture(@RequestParam(name="pid") int pid,
+                                    @RequestParam(name="pName") String pName,
                                     @RequestParam(name="file") MultipartFile file,
-                                    @RequestParam(name="day") int day,
-                                    @RequestParam(name="month") int month,
                                     @RequestParam(name="year") int year,
                                     Model model, HttpServletRequest request){
         if(!Interceptor.getInterceptor(request)){
             return "index";
         }
+        String imgSrc = ImgUtil.getImgName(file);
         UserInfoBean userInfoBean = (UserInfoBean) request.getSession().getAttribute("userInfoBean");
-        NewsBean newsBean = null;
+        PictureBean pictureBean = null;
         boolean flag = false;
         try {
-            String imgSrc = ImgUtil.getImgName(file);
-            newsBean = newsService.getNews(nid);
-            newsBean.setContent(content);
-            newsBean.setDay(day);
-            newsBean.setMonth(month);
-            newsBean.setYear(year);
-            newsBean.setTitle(title);
-            newsBean.setImgSrc(imgSrc);
-            flag = newsService.updateNews(newsBean);
+            pictureBean = pictureService.getPicture(pid);
+            pictureBean.setImgSrc(imgSrc);
+            pictureBean.setYear(year);
+            pictureBean.setpName(pName);
+            if(!imgSrc.equals("default.png"))
+                pictureBean.setImgSrc(imgSrc);
+            flag = pictureService.updatePicture(pictureBean);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -99,13 +100,10 @@ public class MNewsController {
         return "management";
     }
 
-    @PostMapping("/newNews")
-    public String newNews(
-            @RequestParam(name="content") String content,
-            @RequestParam(name="title") String title,
+    @PostMapping("/newPicture")
+    public String newPicture(
             @RequestParam(name="file") MultipartFile file,
-            @RequestParam(name="day") int day,
-            @RequestParam(name="month") int month,
+            @RequestParam(name="pName") String pName,
             @RequestParam(name="year") int year,
             Model model, HttpServletRequest request){
         if(!Interceptor.getInterceptor(request)){
@@ -113,21 +111,18 @@ public class MNewsController {
         }
         String imgSrc = ImgUtil.getImgName(file);
         UserInfoBean userInfoBean = (UserInfoBean) request.getSession().getAttribute("userInfoBean");
-        NewsBean newsBean = new NewsBean();
-        newsBean.setContent(content);
-        newsBean.setDay(day);
-        newsBean.setMonth(month);
-        newsBean.setYear(year);
-        newsBean.setTitle(title);
-        if(!imgSrc.equals("default.png"))
-            newsBean.setImgSrc(imgSrc);
-        newsService.addNews(newsBean);
+        PictureBean pictureBean = new PictureBean();
+        pictureBean.setpName(pName);
+        pictureBean.setYear(year);
+        pictureBean.setImgSrc(imgSrc);
+        pictureService.addPicture(pictureBean);
+
         model.addAttribute("userInfoBean",userInfoBean);
         return "management";
     }
 
-    @GetMapping(value = "/newsPage")
-    public String getNewsPage(@RequestParam(name = "page", required = false, defaultValue = "1") int page, @RequestParam(name = "year", required = false, defaultValue = "0") int year, Model model, HttpServletRequest request) {
+    @GetMapping(value = "/picturePage")
+    public String getPicturePage(@RequestParam(name = "page", required = false, defaultValue = "1") int page, @RequestParam(name = "year", required = false, defaultValue = "0") int year, Model model, HttpServletRequest request) {
         if(!Interceptor.getInterceptor(request)){
             return "index";
         }
@@ -136,48 +131,47 @@ public class MNewsController {
             boolean flag = true;
             HttpSession session = request.getSession();
             try {
-                newsBeanList = (List<NewsBean>) session.getAttribute("newsBeanList");
+                pictureBeanList = (List<PictureBean>) session.getAttribute("pictureBeanList");
             }catch (Exception e){
-                System.err.println(e.toString());
+                System.out.println(e.toString());
                 flag = false;
             }
-            if(flag && newsBeanList!=null){
-                if(newsBeanList.size()>(page-1)*pagesize){
-                    int pageNumber = (int)Math.ceil(newsBeanList.size()/fpagesize);
+            if(flag && pictureBeanList!=null){
+                if(pictureBeanList.size()>(page-1)*pagesize){
+                    int pageNumber = (int)Math.ceil(pictureBeanList.size()/fpagesize);
                     int[] pageList = new int[pageNumber];
                     for(int i =0;i<pageNumber;i++){
                         pageList[i] = i+1;
                     }
-                    model.addAttribute("userInfoBean",userInfoBean);
-                    model.addAttribute("newsBeanList", newsBeanList.subList((page-1)*pagesize,Math.min(page*7,newsBeanList.size())));
+                    model.addAttribute("pictureBeanList", pictureBeanList.subList((page-1)*pagesize,Math.min(page*7,pictureBeanList.size())));
                     model.addAttribute("page",page);
                     model.addAttribute("pageList",pageList);
                     model.addAttribute("year",year);
-                    return "newslist";
+                    return "picturelist";
                 }
             }
         }
         try {
             if(year == 0) {
-                newsBeanList = newsService.getNewsList();
+                pictureBeanList = pictureService.getPictureBeanList();
             }else{
-                newsBeanList = newsService.getNewsList(year);
+                pictureBeanList = pictureService.getPictureBeanList(year);
             }
             HttpSession session = request.getSession();
-            session.setAttribute("newsBeanList",newsBeanList);
+            session.setAttribute("pictureBeanList",pictureBeanList);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        int pageNumber = (int)Math.ceil(newsBeanList.size()/fpagesize);
+        int pageNumber = (int)Math.ceil(pictureBeanList.size()/fpagesize);
         int[] pageList = new int[pageNumber];
         for(int i =0;i<pageNumber;i++){
             pageList[i] = i+1;
         }
         model.addAttribute("userInfoBean",userInfoBean);
-        model.addAttribute("newsBeanList", newsBeanList.subList(0,Math.min(pagesize,newsBeanList.size())));
+        model.addAttribute("pictureBeanList", pictureBeanList.subList(0,Math.min(pagesize,pictureBeanList.size())));
         model.addAttribute("page",1);
         model.addAttribute("pageList",pageList);
         model.addAttribute("year",year);
-        return "newslist";
+        return "picturelist";
     }
 }

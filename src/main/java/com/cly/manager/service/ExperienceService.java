@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ExperienceService {
     List<ExperienceBean> getExperienceBeanList(int uid) throws Exception;
+    boolean addExperienceBean(ExperienceBean experienceBean);
+    boolean deleteExperienceBean(int uid);
 }

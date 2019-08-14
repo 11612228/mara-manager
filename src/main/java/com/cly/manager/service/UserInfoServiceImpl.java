@@ -29,6 +29,11 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
+    public UserInfoBean getUserInfo(String realName) throws Exception {
+        return userInfoDao.fetchUserInfo(realName);
+    }
+
+    @Override
     public boolean addUserInfo(UserInfoBean userInfoBean) {
         return userInfoDao.addUserInfo(userInfoBean);
     }
@@ -36,5 +41,10 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public boolean updateUserInfo(UserInfoBean userInfoBean) {
         return userInfoDao.updateUserInfo(userInfoBean);
+    }
+
+    @Override
+    public boolean deleteUserInfo(int uid) {
+        return userInfoDao.deleteUserInfo(uid);
     }
 }

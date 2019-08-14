@@ -163,4 +163,19 @@ public class NewsDaoImpl implements NewsDao {
            return false;
         }
     }
+
+    @Override
+    public boolean deleteNews(int nid) {
+        try {
+            connection = dbutil.getConnection();
+            String sql="delete from News where nid = ?";
+            preparedStatement=connection.prepareStatement(sql);
+            preparedStatement.setInt(1, nid);
+            int rtn = preparedStatement.executeUpdate();
+            dbutil.closeDBResource(connection, preparedStatement, resultSet);
+            return rtn!=0;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

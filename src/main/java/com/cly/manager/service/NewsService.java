@@ -11,4 +11,5 @@ public interface NewsService {
     NewsBean getNews(int nid) throws Exception;
     boolean addNews(NewsBean newsBean);
     boolean updateNews(NewsBean newsBean);
+    boolean deleteNews(int nid);
 }
