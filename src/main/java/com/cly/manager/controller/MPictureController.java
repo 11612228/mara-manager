@@ -143,6 +143,7 @@ public class MPictureController {
                     for(int i =0;i<pageNumber;i++){
                         pageList[i] = i+1;
                     }
+                    model.addAttribute("userInfoBean", userInfoBean);
                     model.addAttribute("pictureBeanList", pictureBeanList.subList((page-1)*pagesize,Math.min(page*pagesize,pictureBeanList.size())));
                     model.addAttribute("page",page);
                     model.addAttribute("pageList",pageList);

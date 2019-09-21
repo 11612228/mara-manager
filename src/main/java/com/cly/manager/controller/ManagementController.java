@@ -51,6 +51,10 @@ public class ManagementController {
                 return "redirect:/newsPage?page=1&amp;year=0";
             case 52:
                 return "redirect:/addNews";
+            case 6:
+                return "redirect:/resourcePage?page=1";
+            case 62:
+                return "redirect:/addResource";
             case 404:
                 request.getSession().removeAttribute("userInfoBean");
                 return "index";
@@ -63,27 +67,27 @@ public class ManagementController {
 
 
 
-    @PostMapping(value = "/upload")
-    public String fileUpload(@RequestParam(value = "file") MultipartFile file,@RequestParam(value = "uid") int uid, Model model) {
-        if (file.isEmpty()) {
-            System.out.println("文件为空空");
-        }
-        String fileName = file.getOriginalFilename();  // 文件名
-        String suffixName = fileName.substring(fileName.lastIndexOf("."));  // 后缀名
-        String filePath = "//Users//cly//Desktop//linjh//"; // 上传后的路径
-        fileName = UUID.randomUUID() + suffixName; // 新文件名
-        File dest = new File(filePath + fileName);
-        if (!dest.getParentFile().exists()) {
-            dest.getParentFile().mkdirs();
-        }
-        try {
-            file.transferTo(dest);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String imgSrc = "/"+fileName;
-        model.addAttribute("imgSrc",fileName);
-        return "userinfo";
-    }
+//    @PostMapping(value = "/upload")
+//    public String fileUpload(@RequestParam(value = "file") MultipartFile file,@RequestParam(value = "uid") int uid, Model model) {
+//        if (file.isEmpty()) {
+//            System.out.println("文件为空空");
+//        }
+//        String fileName = file.getOriginalFilename();  // 文件名
+//        String suffixName = fileName.substring(fileName.lastIndexOf("."));  // 后缀名
+//        String filePath = "//Users//cly//Desktop//linjh//"; // 上传后的路径
+//        fileName = UUID.randomUUID() + suffixName; // 新文件名
+//        File dest = new File(filePath + fileName);
+//        if (!dest.getParentFile().exists()) {
+//            dest.getParentFile().mkdirs();
+//        }
+//        try {
+//            file.transferTo(dest);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        String imgSrc = "/"+fileName;
+//        model.addAttribute("imgSrc",fileName);
+//        return "userinfo";
+//    }
 
 }

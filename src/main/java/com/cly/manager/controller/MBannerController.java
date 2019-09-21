@@ -88,10 +88,11 @@ public class MBannerController {
                     for(int i =0;i<pageNumber;i++){
                         pageList[i] = i+1;
                     }
+                    model.addAttribute("userInfoBean", userInfoBean);
                     model.addAttribute("bannerBeanList", bannerBeanList.subList((page-1)*pagesize,Math.min(page*7,bannerBeanList.size())));
                     model.addAttribute("page",page);
                     model.addAttribute("pageList",pageList);
-                    return "publicationlist";
+                    return "bannerlist";
                 }
             }
         }
