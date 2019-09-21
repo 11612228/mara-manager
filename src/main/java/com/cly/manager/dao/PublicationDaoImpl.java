@@ -28,7 +28,8 @@ public class PublicationDaoImpl implements PublicationDao {
             int pid = resultSet.getInt("pid");
             String imgSrc = resultSet.getString("imgSrc");
             String content = resultSet.getString("content");
-            String pName = resultSet.getString("pName");
+            String author = resultSet.getString("author");
+            String publisher = resultSet.getString("publisher");
             int year = resultSet.getInt("year");
             int uid = resultSet.getInt("uid");
             String pdfUrl = resultSet.getString("pdfUrl");
@@ -38,7 +39,8 @@ public class PublicationDaoImpl implements PublicationDao {
             publicationBean.setImgSrc(imgSrc);
             publicationBean.setYear(year);
             publicationBean.setUid(uid);
-            publicationBean.setpName(pName);
+            publicationBean.setAuthor(author);
+            publicationBean.setPublisher(publisher);
             publicationBean.setPid(pid);
             publicationBean.setPdfUrl(pdfUrl);
 
@@ -63,7 +65,8 @@ public class PublicationDaoImpl implements PublicationDao {
             int pid = resultSet.getInt("pid");
             String imgSrc = resultSet.getString("imgSrc");
             String content = resultSet.getString("content");
-            String pName = resultSet.getString("pName");
+            String author = resultSet.getString("author");
+            String publisher = resultSet.getString("publisher");
             int uid = resultSet.getInt("uid");
             String pdfUrl = resultSet.getString("pdfUrl");
 
@@ -73,7 +76,8 @@ public class PublicationDaoImpl implements PublicationDao {
             publicationBean.setImgSrc(imgSrc);
             publicationBean.setYear(year);
             publicationBean.setUid(uid);
-            publicationBean.setpName(pName);
+            publicationBean.setAuthor(author);
+            publicationBean.setPublisher(publisher);
             publicationBean.setPid(pid);
             publicationBean.setPdfUrl(pdfUrl);
 
@@ -98,7 +102,8 @@ public class PublicationDaoImpl implements PublicationDao {
             int pid = resultSet.getInt("pid");
             String imgSrc = resultSet.getString("imgSrc");
             String content = resultSet.getString("content");
-            String pName = resultSet.getString("pName");
+            String author = resultSet.getString("author");
+            String publisher = resultSet.getString("publisher");
             int year = resultSet.getInt("year");
             String pdfUrl = resultSet.getString("pdfUrl");
 
@@ -108,7 +113,8 @@ public class PublicationDaoImpl implements PublicationDao {
             publicationBean.setImgSrc(imgSrc);
             publicationBean.setYear(year);
             publicationBean.setUid(uid);
-            publicationBean.setpName(pName);
+            publicationBean.setAuthor(author);
+            publicationBean.setPublisher(publisher);
             publicationBean.setPid(pid);
             publicationBean.setPdfUrl(pdfUrl);
 
@@ -132,7 +138,8 @@ public class PublicationDaoImpl implements PublicationDao {
             int uid = resultSet.getInt("uid");
             String imgSrc = resultSet.getString("imgSrc");
             String content = resultSet.getString("content");
-            String pName = resultSet.getString("pName");
+            String author = resultSet.getString("author");
+            String publisher = resultSet.getString("publisher");
             int year = resultSet.getInt("year");
             String pdfUrl = resultSet.getString("pdfUrl");
 
@@ -140,7 +147,8 @@ public class PublicationDaoImpl implements PublicationDao {
             publicationBean.setImgSrc(imgSrc);
             publicationBean.setYear(year);
             publicationBean.setUid(uid);
-            publicationBean.setpName(pName);
+            publicationBean.setAuthor(author);
+            publicationBean.setPublisher(publisher);
             publicationBean.setPid(pid);
             publicationBean.setPdfUrl(pdfUrl);
         }
@@ -152,13 +160,15 @@ public class PublicationDaoImpl implements PublicationDao {
     public boolean addPublication(PublicationBean publicationBean) {
         try {
             connection = dbutil.getConnection();
-            String sql="insert into Publication (year,content,uid,imgSrc,pdfUrl) values (?,?,?,?,?) ";
+            String sql="insert into Publication (year,content,uid,imgSrc,pdfUrl,author,publisher) values (?,?,?,?,?,?,?) ";
             preparedStatement=connection.prepareStatement(sql);
             preparedStatement.setInt(1,publicationBean.getYear());
             preparedStatement.setString(2,publicationBean.getContent());
             preparedStatement.setInt(3,publicationBean.getUid());
             preparedStatement.setString(4,publicationBean.getImgSrc());
             preparedStatement.setString(5,publicationBean.getPdfUrl());
+            preparedStatement.setString(6,publicationBean.getAuthor());
+            preparedStatement.setString(7,publicationBean.getPublisher());
             int rtn = preparedStatement.executeUpdate();
             dbutil.closeDBResource(connection, preparedStatement, resultSet);
             return rtn!=0;
@@ -171,13 +181,15 @@ public class PublicationDaoImpl implements PublicationDao {
     public boolean updatePublication(PublicationBean publicationBean) {
         try {
             connection = dbutil.getConnection();
-            String sql="UPDATE Publication SET year=?, content=?, imgSrc=?, pdfUrl=? where pid = ?";
+            String sql="UPDATE Publication SET year=?, content=?, imgSrc=?, pdfUrl=?, author=?, publisher=?  where pid = ?";
             preparedStatement=connection.prepareStatement(sql);
             preparedStatement.setInt(1,publicationBean.getYear());
             preparedStatement.setString(2,publicationBean.getContent());
             preparedStatement.setString(3,publicationBean.getImgSrc());
             preparedStatement.setString(4,publicationBean.getPdfUrl());
-            preparedStatement.setInt(5,publicationBean.getPid());
+            preparedStatement.setString(5,publicationBean.getAuthor());
+            preparedStatement.setString(6,publicationBean.getPublisher());
+            preparedStatement.setInt(7,publicationBean.getPid());
             int rtn = preparedStatement.executeUpdate();
             dbutil.closeDBResource(connection, preparedStatement, resultSet);
             return rtn!=0;

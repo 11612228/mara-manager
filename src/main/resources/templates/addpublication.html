@@ -88,9 +88,6 @@
                         </li>
                     </ul>
                 </li>
-                <!--<li class="">-->
-                <!--<a href="/mIndex?id=2">Alumni</a>-->
-                <!--</li>-->
             </ul>
         </div>
     </div>
@@ -105,12 +102,16 @@
     <div id="localImag">
         <img id="img1" alt="" border="1"/>
     </div>
-    <div>content
-        <textarea id="content" rows="5" cols="30" wrap="no/off" ></textarea></div>
+    <div>Title</div>
+        <textarea id="content" rows="5" cols="30" wrap="no/off" ></textarea>
     <div>year</div>
         <input id="year" type="number" >
     <div>pdfUrl</div>
         <textarea id="pdfUrl" rows="5" cols="30" wrap="no/off" ></textarea>
+    <div>authors</div>
+        <textarea id="author" rows="5" cols="30" wrap="no/off" ></textarea>
+    <div>publisher</div>
+        <textarea id="publisher" rows="5" cols="30" wrap="no/off" ></textarea>
     <div>authorName</div>
         <input id="authorName" type="text" >
     <div>
@@ -183,7 +184,9 @@
                 content: document.getElementById("content").value,
                 year: document.getElementById("year").value,
                 pdfUrl: document.getElementById("pdfUrl").value,
-                authorName: document.getElementById("authorName").value
+                authorName: document.getElementById("authorName").value,
+                author: document.getElementById("author").value,
+                publisher: document.getElementById("publisher").value
             };
             post("/newPublication", params);
     }

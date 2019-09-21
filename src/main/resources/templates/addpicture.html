@@ -109,7 +109,7 @@
         <div>pName</div>
             <textarea id="pName" rows="1" cols="30" wrap="no/off" ></textarea>
         <div>year</div>
-            <input id="year" type="number" >
+        <input id="year" type="number" >
         <button class="reg-btn" id="upload" onclick="upload()">
             Upload
         </button>
@@ -178,7 +178,6 @@
         var params = {
             pName: document.getElementById("pName").value,
             year: document.getElementById("year").value,
-            pid: document.getElementById("pid").innerHTML
         };
         post("/newPicture", params);
     }

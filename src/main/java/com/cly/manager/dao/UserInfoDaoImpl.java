@@ -204,7 +204,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
     public boolean addUserInfo(UserInfoBean userInfoBean) {
         try {
             connection = dbutil.getConnection();
-            String sql="insert into UserInfo (userName,realName,imgSrc,password,isAdmin, email, post, telephone, office, brief, address) values (?,?,?,?,?,?,?,?,?,?) ";
+            String sql="insert into UserInfo (userName,realName,imgSrc,password,isAdmin, email, post, telephone, office, brief, address) values (?,?,?,?,?,?,?,?,?,?,?) ";
             preparedStatement=connection.prepareStatement(sql);
             preparedStatement.setString(1, userInfoBean.getUserName());
             preparedStatement.setString(2, userInfoBean.getRealName());

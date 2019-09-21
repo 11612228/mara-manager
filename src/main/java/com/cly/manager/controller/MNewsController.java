@@ -149,7 +149,7 @@ public class MNewsController {
                         pageList[i] = i+1;
                     }
                     model.addAttribute("userInfoBean",userInfoBean);
-                    model.addAttribute("newsBeanList", newsBeanList.subList((page-1)*pagesize,Math.min(page*7,newsBeanList.size())));
+                    model.addAttribute("newsBeanList", newsBeanList.subList((page-1)*pagesize,Math.min(page*pagesize,newsBeanList.size())));
                     model.addAttribute("page",page);
                     model.addAttribute("pageList",pageList);
                     model.addAttribute("year",year);
@@ -175,7 +175,7 @@ public class MNewsController {
         }
         model.addAttribute("userInfoBean",userInfoBean);
         model.addAttribute("newsBeanList", newsBeanList.subList(0,Math.min(pagesize,newsBeanList.size())));
-        model.addAttribute("page",1);
+        model.addAttribute("page",page);
         model.addAttribute("pageList",pageList);
         model.addAttribute("year",year);
         return "newslist";

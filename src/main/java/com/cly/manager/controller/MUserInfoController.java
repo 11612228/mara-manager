@@ -174,6 +174,7 @@ public class MUserInfoController {
         if(!Interceptor.getInterceptor(request)){
             return "index";
         }
+        System.out.println(userName+" "+password);
         String imgSrc = ImgUtil.getImgName(file);
         UserInfoBean userInfoBean = (UserInfoBean) request.getSession().getAttribute("userInfoBean");
         UserInfoBean userInfo = new UserInfoBean();

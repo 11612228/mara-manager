@@ -5,7 +5,8 @@ import java.io.Serializable;
 public class PublicationBean implements Serializable {
     private int pid;
     private String imgSrc;
-    private String pName;
+    private String author;
+    private String publisher;
     private int uid;
     private int year;
     private String content;
@@ -13,8 +14,12 @@ public class PublicationBean implements Serializable {
 
 
 
-    public String getpName() {
-        return pName;
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getPublisher() {
+        return publisher;
     }
 
     public String getPdfUrl() {
@@ -57,12 +62,13 @@ public class PublicationBean implements Serializable {
         this.imgSrc = imgSrc;
     }
 
-    public String getaName() {
-        return pName;
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
-    public void setpName(String aName) {
-        this.pName = pName;
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
     }
 
     public int getUid() {

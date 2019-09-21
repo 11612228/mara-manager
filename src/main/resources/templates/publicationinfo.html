@@ -4,9 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="icon" type="images/jpg" href="./images/favicon.jpg">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!--<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">-->
     <title>Advanced Low dimensional Materials Lab </title>
-    <!--     <title> 南方科技大学</title>-->
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="renderer" content="webkit">
@@ -88,9 +86,6 @@
                         </li>
                     </ul>
                 </li>
-                <!--<li class="">-->
-                <!--<a href="/mIndex?id=2">Alumni</a>-->
-                <!--</li>-->
             </ul>
         </div>
     </div>
@@ -114,13 +109,21 @@
             <input id="year" type="number" th:value="${publicationBean.getYear()}">
         <div>pdfUrl</div>
             <textarea id="pdfUrl" rows="4" cols="30" wrap="no/off">[[${publicationBean.getPdfUrl()}]]</textarea>
+        <div>authors</div>
+            <textarea id="author" rows="5" cols="30" wrap="no/off" >[[${publicationBean.getAuthor()}]]</textarea>
+        <div>publisher</div>
+            <textarea id="publisher" rows="5" cols="30" wrap="no/off" >[[${publicationBean.getPublisher()}]]</textarea>
         <div>
+        <div>authorName</div>
+            <input id="authorName" type="text" >
+
             <button class="reg-btn" id="upload" onclick="upload()">
                 Upload
             </button>
         </div>
     </div>
         </div>
+    </div>
     </div>
 
     <script type="text/javascript">
@@ -185,11 +188,12 @@
                     year: document.getElementById("year").value,
                     pdfUrl: document.getElementById("pdfUrl").value,
                     authorName: document.getElementById("authorName").value,
-                    pid: document.getElementById("pid").innerHTML
+                    pid: document.getElementById("pid").innerHTML,
+                    author: document.getElementById("author").value,
+                    publisher: document.getElementById("publisher").value
                 };
                 post("/updatePublication", params);
         }
     </script>
-
-</body>
+ </body>
 </html>

@@ -117,7 +117,7 @@
                     <div class="page">
                         <span>&lt;</span>
                         <span th:each="num:${pageList}">
-                            <span th:if="${page} ne ${num}"><a th:href="'/bannerPage?page='+${num}+'&'+${year}" th:text="${num}"></a></span>
+                            <span th:if="${page} ne ${num}"><a th:href="'/bannerPage?page='+${num}" th:text="${num}"></a></span>
                             <span th:if="${page} eq ${num}" class="active"><a th:text="${num}"></a></span>
                         </span>
                     </div>

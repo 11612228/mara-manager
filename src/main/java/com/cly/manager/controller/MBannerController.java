@@ -62,14 +62,7 @@ public class MBannerController {
         if(!Interceptor.getInterceptor(request)){
             return "index";
         }
-        UserInfoBean userInfoBean = (UserInfoBean) request.getSession().getAttribute("userInfoBean");
         bannerService.deleteBannerBean(bid);
-        List<BannerBean> bannerBeanList = null;
-        try {
-            bannerBeanList = bannerService.getBannerBeanList();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return "redirect:/bannerPage?page=1";
     }
 
@@ -116,7 +109,7 @@ public class MBannerController {
         }
         model.addAttribute("userInfoBean",userInfoBean);
         model.addAttribute("bannerBeanList", bannerBeanList.subList(0,Math.min(pagesize,bannerBeanList.size())));
-        model.addAttribute("page",1);
+        model.addAttribute("page",page);
         model.addAttribute("pageList",pageList);
         return "bannerlist";
     }

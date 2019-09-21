@@ -85,6 +85,8 @@ public class MPublicationController {
                                     @RequestParam(name="file") MultipartFile file,
                                     @RequestParam(name="authorName") String authorName,
                                     @RequestParam(name="year") int year,
+                                    @RequestParam(name="author") String author,
+                                    @RequestParam(name="publisher") String publisher,
                                     Model model, HttpServletRequest request){
         if(!Interceptor.getInterceptor(request)){
             return "index";
@@ -104,6 +106,8 @@ public class MPublicationController {
             publicationBean.setContent(content);
             publicationBean.setPdfUrl(pdfUrl);
             publicationBean.setYear(year);
+            publicationBean.setAuthor(author);
+            publicationBean.setPublisher(publisher);
             if(!imgSrc.equals("default.png"))
                 publicationBean.setImgSrc(imgSrc);
             publicationBean.setUid(userInfo.getUid());
@@ -122,6 +126,8 @@ public class MPublicationController {
             @RequestParam(name="file") MultipartFile file,
             @RequestParam(name="authorName") String authorName,
             @RequestParam(name="year") int year,
+            @RequestParam(name="author") String author,
+            @RequestParam(name="publisher") String publisher,
             Model model, HttpServletRequest request){
         if(!Interceptor.getInterceptor(request)){
             return "index";
@@ -139,7 +145,13 @@ public class MPublicationController {
         publicationBean.setPdfUrl(pdfUrl);
         publicationBean.setYear(year);
         publicationBean.setImgSrc(imgSrc);
-        publicationBean.setUid(userInfo.getUid());
+        try {
+            publicationBean.setUid(userInfo.getUid());
+        }catch (Exception e){
+            publicationBean.setUid(0);
+        }
+        publicationBean.setAuthor(author);
+        publicationBean.setPublisher(publisher);
         publicationService.addPublication(publicationBean);
 
         model.addAttribute("userInfoBean",userInfoBean);
@@ -168,7 +180,8 @@ public class MPublicationController {
                     for(int i =0;i<pageNumber;i++){
                         pageList[i] = i+1;
                     }
-                    model.addAttribute("publicationBeanList", publicationBeanList.subList((page-1)*pagesize,Math.min(page*7,publicationBeanList.size())));
+                    model.addAttribute("userInfoBean",userInfoBean);
+                    model.addAttribute("publicationBeanList", publicationBeanList.subList((page-1)*pagesize,Math.min(page*pagesize,publicationBeanList.size())));
                     model.addAttribute("page",page);
                     model.addAttribute("pageList",pageList);
                     model.addAttribute("year",year);
@@ -194,7 +207,7 @@ public class MPublicationController {
         }
         model.addAttribute("userInfoBean",userInfoBean);
         model.addAttribute("publicationBeanList", publicationBeanList.subList(0,Math.min(pagesize,publicationBeanList.size())));
-        model.addAttribute("page",1);
+        model.addAttribute("page",page);
         model.addAttribute("pageList",pageList);
         model.addAttribute("year",year);
         return "publicationlist";

@@ -42,7 +42,7 @@ public class BannerDaoImpl implements BannerDao{
     public BannerBean fetchBannerBean(int bid) throws Exception {
         BannerBean bannerBean = new BannerBean();
         connection = dbutil.getConnection();
-        String sql="select * from Banner a where bid=?";
+        String sql="select * from Banner a where bid = ?";
         preparedStatement=connection.prepareStatement(sql);
         preparedStatement.setInt(1,bid);
         resultSet=preparedStatement .executeQuery();
@@ -90,7 +90,7 @@ public class BannerDaoImpl implements BannerDao{
     public boolean updateBannerBean(BannerBean bannerBean) {
         try {
             connection = dbutil.getConnection();
-            String sql="UPDATE Publication SET imgSrc=? where bid = ?";
+            String sql="UPDATE Banner SET imgSrc=? where bid = ?";
             preparedStatement=connection.prepareStatement(sql);
             preparedStatement.setString(1,bannerBean.getImgSrc());
             preparedStatement.setInt(2,bannerBean.getBid());

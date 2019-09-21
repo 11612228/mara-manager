@@ -143,7 +143,7 @@ public class MPictureController {
                     for(int i =0;i<pageNumber;i++){
                         pageList[i] = i+1;
                     }
-                    model.addAttribute("pictureBeanList", pictureBeanList.subList((page-1)*pagesize,Math.min(page*7,pictureBeanList.size())));
+                    model.addAttribute("pictureBeanList", pictureBeanList.subList((page-1)*pagesize,Math.min(page*pagesize,pictureBeanList.size())));
                     model.addAttribute("page",page);
                     model.addAttribute("pageList",pageList);
                     model.addAttribute("year",year);
@@ -169,7 +169,7 @@ public class MPictureController {
         }
         model.addAttribute("userInfoBean",userInfoBean);
         model.addAttribute("pictureBeanList", pictureBeanList.subList(0,Math.min(pagesize,pictureBeanList.size())));
-        model.addAttribute("page",1);
+        model.addAttribute("page",page);
         model.addAttribute("pageList",pageList);
         model.addAttribute("year",year);
         return "picturelist";

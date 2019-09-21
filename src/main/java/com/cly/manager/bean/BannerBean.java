@@ -10,7 +10,7 @@ public class BannerBean implements Serializable {
         return bid;
     }
 
-    public void setBid(int pid) {
+    public void setBid(int bid) {
         this.bid = bid;
     }
 
